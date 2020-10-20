@@ -11,12 +11,13 @@ import {
   PopoverBody,
 } from "@chakra-ui/core";
 import EmojiPicker from "./EmojiPicker";
+import { EmojiType } from "./types";
 
 type Props = {
-  onSelectEmoji?: (emoji: string) => void;
+  onSelectEmoji: (emoji: EmojiType) => void;
 };
 
-const EmojiButton = ({}: Props) => {
+const EmojiButton = ({ onSelectEmoji }: Props) => {
   return (
     <Popover>
       <PopoverTrigger>
@@ -27,7 +28,7 @@ const EmojiButton = ({}: Props) => {
         <PopoverCloseButton />
         <PopoverHeader>Confirmation!</PopoverHeader>
         <PopoverBody>
-          <EmojiPicker />
+          <EmojiPicker onSelectEmoji={onSelectEmoji} />
         </PopoverBody>
       </PopoverContent>
     </Popover>

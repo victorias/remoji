@@ -4,4 +4,4 @@ type UnicodeEmoji = {
   unicodeString: string;
 };
 
-export type Emoji = UnicodeEmoji;
+export type EmojiType = UnicodeEmoji;

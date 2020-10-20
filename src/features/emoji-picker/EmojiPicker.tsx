@@ -1,35 +1,47 @@
 import React from "react";
 import { SimpleGrid, Flex, Heading } from "@chakra-ui/core";
 import { unicodeEmojis, categories, categoriesList } from "./constants";
-import { Emoji } from "./types";
+import { EmojiType } from "./types";
+import Emoji from "./Emoji";
 
-type Props = {};
+type Props = {
+  onSelectEmoji: (emoji: EmojiType) => void;
+};
 
 const EmojiCategory = ({
   category,
+  onSelectEmoji,
   emojis,
 }: {
   category: string;
-  emojis: Array<Emoji>;
+  emojis: Array<EmojiType>;
+  onSelectEmoji: (emoji: EmojiType) => void;
 }) => {
   return (
     <Flex direction="column">
       <Heading>{category}</Heading>
       <SimpleGrid minChildWidth="20px" spacing="4px" alignContent="center">
         {emojis.map((emoji) => (
-          <Flex textAlign="center">{emoji.unicodeString}</Flex>
+          <Emoji
+            key={emoji.unicodeString}
+            onClick={onSelectEmoji}
+            emoji={emoji}
+          />
         ))}
       </SimpleGrid>
     </Flex>
   );
 };
 
-const EmojiPicker = ({}: Props) => {
-  console.log(unicodeEmojis);
+const EmojiPicker = ({ onSelectEmoji }: Props) => {
   return (
     <Flex direction="column">
       {categoriesList.map((category) => (
-        <EmojiCategory category={category} emojis={unicodeEmojis[category]} />
+        <EmojiCategory
+          onSelectEmoji={onSelectEmoji}
+          category={category}
+          emojis={unicodeEmojis[category]}
+        />
       ))}
     </Flex>
   );
