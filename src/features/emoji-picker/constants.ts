@@ -1,3 +1,6 @@
+// @ts-ignore
+import unicodeMap from "emoji-unicode-map";
+
 const _unicodeEmojis = {
   people: [
     "😀",
@@ -1466,6 +1469,7 @@ export const unicodeEmojis = categoriesList.reduce((prevVal, category) => {
   prevVal[category] = _unicodeEmojis[category].map((unicodeString: string) => ({
     type: "unicode",
     unicodeString,
+    name: unicodeMap.get(unicodeString) || "",
   }));
   return prevVal;
 }, {});
