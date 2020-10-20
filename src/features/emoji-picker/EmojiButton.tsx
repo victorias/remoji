@@ -23,7 +23,7 @@ const EmojiButton = ({ onSelectEmoji }: Props) => {
       <PopoverTrigger>
         <Button>Emoji Button</Button>
       </PopoverTrigger>
-      <PopoverContent zIndex={4}>
+      <PopoverContent zIndex={4} maxHeight="400px" overflowY="scroll">
         <PopoverArrow />
         <PopoverCloseButton />
         <PopoverHeader>Confirmation!</PopoverHeader>
