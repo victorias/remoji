@@ -1,44 +1,33 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+Hi Remotion! :wave:
 
-## Available Scripts
+![Kapture 2020-10-22 at 11 15 00](https://user-images.githubusercontent.com/549257/96913449-7d7db500-1458-11eb-8a94-aa07431158cd.gif)
 
-In the project directory, you can run:
+This is my quick and basic (~3 hrs) emoji picker.
 
-### `yarn start`
+In terms of technology, this project was bootstrapped with a CRA Redux + Typescript template. For a base UI Kit, I used [Chakra](https://chakra-ui.com/), which comes with some sane Tailwind inspired defaults and allows me to configure some basic styling in Javascript. It also manages popper state for me for free. Because of the time limit, UI polish was not my primary focus. Like other UI kits, the primary downside of Chakra is that it can be overly prescriptive.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+I've defined an EmojiType that currently only supports unicode emojis, like so:
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```tsx
+type UnicodeEmoji = {
+  type: "unicode";
+  name: string;
+  unicodeString: string;
+};
 
-### `yarn test`
+export type EmojiType = UnicodeEmoji;
+```
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This is to enable future improvements such as a custom emoji type and search.
 
-### `yarn build`
+I like to co-locate files by feature, so all associated Emoji Picker files are in `src/features/emoji-picker`. The basic layout of the emojis was autolayouted by CSS Grid. This can have some performance concerns on scroll performance when the set of emojis is sufficiently large enough.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The `EmojiPicker` is automatically attached to the `EmojiButton`, so the intended API is to use the Button. Right now the picker doesn't really manage it's own state as all the data is derived from the `constants`. The reducer is for the selected emoji itself and has a type of:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```tsx
+interface EmojiState {
+  selectedEmoji: null | EmojiType;
+}
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Thanks! This was a fun little challenge :)
